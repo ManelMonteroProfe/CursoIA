@@ -1,12 +1,12 @@
 # Noticias sobre Inteligencia Artificial
 
 12/04/2026
-Sam Altman responde al artículo incendiario de The New Yorker tras el ataque a su casa
-Resumen de la noticia El CEO de OpenAI, Sam Altman, publicó un artículo en su blog el viernes por la tarde, en respuesta a…
+### Sam Altman responde al artículo incendiario de The New Yorker tras el ataque a su casa
+### Resumen de la noticia El CEO de OpenAI, Sam Altman, publicó un artículo en su blog el viernes por la tarde, en respuesta a…
 
 11/04/2026
-La Xunta permitirá el uso de IA en colegios para personalizar aprendizajes y detectar dificultades.
-La Xunta de Galicia ha anunciado que incorporará el uso de la inteligencia artificial (IA) en su nueva Ley de educación digital, con el…
+### La Xunta permitirá el uso de IA en colegios para personalizar aprendizajes y detectar dificultades.
+### La Xunta de Galicia ha anunciado que incorporará el uso de la inteligencia artificial (IA) en su nueva Ley de educación digital, con el…
 
 11/04/2026
 Anthropic prohibió temporalmente al creador de OpenClaw el acceso a Claude
