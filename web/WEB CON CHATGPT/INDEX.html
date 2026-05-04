@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <title>Zapatos Custom Fútbol</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #111;
+      color: white;
+    }
+
+    header {
+      background: black;
+      padding: 20px;
+      text-align: center;
+      border-bottom: 2px solid #e63946;
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 28px;
+    }
+
+    header p {
+      margin-top: 5px;
+      color: #aaa;
+    }
+
+    .container {
+      padding: 20px;
+      max-width: 1100px;
+      margin: auto;
+    }
+
+    h2 {
+      margin-bottom: 15px;
+    }
+
+    .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+    }
+
+    .product {
+      background: #222;
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform 0.2s;
+    }
+
+    .product:hover {
+      transform: scale(1.03);
+    }
+
+    .product img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+    }
+
+    .product-content {
+      padding: 15px;
+    }
+
+    .product h3 {
+      margin: 0;
+    }
+
+    .product p {
+      color: #bbb;
+      font-size: 14px;
+    }
+
+    button {
+      background: #e63946;
+      border: none;
+      padding: 10px;
+      color: white;
+      cursor: pointer;
+      width: 100%;
+      border-radius: 6px;
+      margin-top: 10px;
+      font-weight: bold;
+    }
+
+    button:hover {
+      opacity: 0.9;
+    }
+
+    .selected {
+      border: 2px solid #e63946;
+    }
+
+    .form-section {
+      margin-top: 40px;
+      background: #222;
+      padding: 20px;
+      border-radius: 12px;
+    }
+
+    label {
+      display: block;
+      margin-top: 15px;
+      font-size: 14px;
+    }
+
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-top: 5px;
+      border-radius: 6px;
+      border: none;
+      outline: none;
+    }
+
+    .summary {
+      margin-top: 15px;
+      background: #111;
+      padding: 10px;
+      border-radius: 6px;
+      font-size: 14px;
+      color: #ddd;
+    }
+
+    footer {
+      text-align: center;
+      padding: 20px;
+      margin-top: 40px;
+      border-top: 1px solid #333;
+      color: #777;
+      font-size: 14px;
+    }
+
+  </style>
+</head>
+
+<body>
+
+<header>
+  <h1>⚽ Zapatos Custom Fútbol</h1>
+  <p>Diseña tus zapatillas inspiradas en tu equipo</p>
+</header>
+
+<div class="container">
+
+  <h2>Elige tu estilo</h2>
+
+  <div class="products">
+
+    <div class="product" id="Madrid">
+      <img src="https://via.placeholder.com/400x200/ffffff/000000?text=Estilo+Madrid">
+      <div class="product-content">
+        <h3>Estilo Madrid</h3>
+        <p>Diseño blanco con detalles dorados</p>
+        <button onclick="selectProduct('Madrid')">Personalizar</button>
+      </div>
+    </div>
+
+    <div class="product" id="Barcelona">
+      <img src="https://via.placeholder.com/400x200/004d98/ff0000?text=Estilo+Barcelona">
+      <div class="product-content">
+        <h3>Estilo Barcelona</h3>
+        <p>Colores azul y rojo intensos</p>
+        <button onclick="selectProduct('Barcelona')">Personalizar</button>
+      </div>
+    </div>
+
+    <div class="product" id="Atletico">
+      <img src="https://via.placeholder.com/400x200/ff0000/ffffff?text=Estilo+Atletico">
+      <div class="product-content">
+        <h3>Estilo Atlético</h3>
+        <p>Diseño rojo y blanco clásico</p>
+        <button onclick="selectProduct('Atletico')">Personalizar</button>
+      </div>
+    </div>
+
+  </div>
+
+  <div class="form-section">
+    <h2>Personalización</h2>
+
+    <div class="summary" id="summary">
+      No has seleccionado ningún producto
+    </div>
+
+    <label>Nombre en el zapato:</label>
+    <input type="text" id="name" placeholder="Ej: Carlos">
+
+    <label>Número:</label>
+    <input type="number" id="number" placeholder="Ej: 7">
+
+    <button onclick="buy()">Comprar ahora</button>
+  </div>
+
+</div>
+
+<footer>
+  © 2026 Zapatos Custom Fútbol — Demo educativa
+</footer>
+
+<script>
+  let selectedProduct = "";
+
+  function selectProduct(product) {
+    selectedProduct = product;
+
+    // Quitar selección previa
+    document.querySelectorAll(".product").forEach(p => {
+      p.classList.remove("selected");
+    });
+
+    // Marcar seleccionado
+    document.getElementById(product).classList.add("selected");
+
+    // Mostrar resumen
+    document.getElementById("summary").innerText =
+      "Producto seleccionado: " + product;
+  }
+
+  function buy() {
+    const name = document.getElementById("name").value;
+    const number = document.getElementById("number").value;
+
+    if (!selectedProduct) {
+      alert("⚠️ Selecciona un producto primero");
+      return;
+    }
+
+    if (!name) {
+      alert("⚠️ Introduce un nombre");
+      return;
+    }
+
+    alert(
+      "✅ Pedido realizado\n\n" +
+      "Producto: " + selectedProduct +
+      "\nNombre: " + name +
+      "\nNúmero: " + (number || "No especificado")
+    );
+  }
+</script>
+
+</body>
+</html>

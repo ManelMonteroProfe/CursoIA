@@ -1,0 +1,360 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ZapasCustom | Tu Pasión a tus Pies</title>
+    <style>
+        /* --- CSS ESTILOS (PRD Sección 8) --- */
+        :root {
+            --bg-color: #111111;
+            --card-color: #222222;
+            --accent-color: #e63946;
+            --text-color: #ffffff;
+            --secondary-text: #aaaaaa;
+            --gold: #d4af37;
+            --blue: #004d98;
+            --red: #a50044;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            line-height: 1.6;
+            padding-bottom: 50px;
+        }
+
+        header {
+            text-align: center;
+            padding: 40px 20px;
+            background: linear-gradient(to bottom, #1a1a1a, var(--bg-color));
+        }
+
+        header h1 {
+            font-size: 2.5rem;
+            color: var(--accent-color);
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+
+        header p {
+            color: var(--secondary-text);
+            margin-top: 10px;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        /* Listado de Productos */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 25px;
+            margin-bottom: 50px;
+        }
+
+        .product-card {
+            background-color: var(--card-color);
+            border-radius: 12px;
+            overflow: hidden;
+            transition: transform 0.3s ease, border 0.3s ease;
+            border: 2px solid transparent;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .product-card.selected {
+            border-color: var(--accent-color);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Colores dinámicos para placeholders */
+        .img-madrid { background: linear-gradient(45deg, #eee, var(--gold)); color: #333; }
+        .img-barcelona { background: linear-gradient(45deg, var(--blue), var(--red)); }
+        .img-atletico { background: repeating-linear-gradient(45deg, #fff, #fff 20px, var(--accent-color) 20px, var(--accent-color) 40px); color: #111; }
+
+        .product-info {
+            padding: 20px;
+            flex-grow: 1;
+            text-align: center;
+        }
+
+        .product-info h3 {
+            margin-bottom: 10px;
+            font-size: 1.4rem;
+        }
+
+        .product-info p {
+            color: var(--secondary-text);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+
+        .btn-personalizar {
+            background-color: var(--accent-color);
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-weight: bold;
+            width: 100%;
+            transition: background 0.3s;
+        }
+
+        .btn-personalizar:hover {
+            background-color: #c12e3a;
+        }
+
+        /* Sección de Personalización */
+        .customizer-section {
+            background-color: var(--card-color);
+            padding: 30px;
+            border-radius: 12px;
+            border: 1px solid #333;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .customizer-section h2 {
+            text-align: center;
+            margin-bottom: 20px;
+            color: var(--accent-color);
+        }
+
+        .selection-status {
+            text-align: center;
+            margin-bottom: 20px;
+            padding: 10px;
+            background: #333;
+            border-radius: 4px;
+            font-weight: bold;
+        }
+
+        .form-group {
+            margin-bottom: 15px;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: var(--secondary-text);
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            background-color: #1a1a1a;
+            border: 1px solid #444;
+            color: white;
+            border-radius: 6px;
+            font-size: 1rem;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+
+        .btn-buy {
+            background-color: #27ae60;
+            color: white;
+            border: none;
+            padding: 15px;
+            border-radius: 6px;
+            width: 100%;
+            font-size: 1.1rem;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background 0.3s;
+        }
+
+        .btn-buy:hover {
+            background-color: #219150;
+        }
+
+        .btn-buy:disabled {
+            background-color: #444;
+            cursor: not-allowed;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 50px;
+            color: #555;
+            font-size: 0.8rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 600px) {
+            header h1 { font-size: 1.8rem; }
+            .products-grid { grid-template-columns: 1fr; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <h1>ZapasCustom 👟</h1>
+        <p>Zapatos artesanales inspirados en los colores de tu pasión</p>
+    </header>
+
+    <div class="container">
+        <!-- Listado de Productos -->
+        <section class="products-grid">
+            <!-- Madrid -->
+            <div class="product-card" id="card-madrid">
+                <div class="product-image img-madrid">ESTILO MADRID</div>
+                <div class="product-info">
+                    <h3>Modelo Blanco & Oro</h3>
+                    <p>Elegancia pura con detalles dorados premium.</p>
+                    <button class="btn-personalizar" onclick="selectProduct('Estilo Madrid', 'card-madrid')">Personalizar</button>
+                </div>
+            </div>
+
+            <!-- Barcelona -->
+            <div class="product-card" id="card-barcelona">
+                <div class="product-image img-barcelona">ESTILO BARCELONA</div>
+                <div class="product-info">
+                    <h3>Modelo Azulgrana</h3>
+                    <p>Diseño clásico con los colores más vivos de la ciudad condal.</p>
+                    <button class="btn-personalizar" onclick="selectProduct('Estilo Barcelona', 'card-barcelona')">Personalizar</button>
+                </div>
+            </div>
+
+            <!-- Atlético -->
+            <div class="product-card" id="card-atletico">
+                <div class="product-image img-atletico">ESTILO ATLÉTICO</div>
+                <div class="product-info">
+                    <h3>Modelo Rojiblanco</h3>
+                    <p>Coraje y corazón en cada costura de estas zapatillas.</p>
+                    <button class="btn-personalizar" onclick="selectProduct('Estilo Atlético', 'card-atletico')">Personalizar</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Zona de Personalización -->
+        <section class="customizer-section" id="personalizacion">
+            <h2>Personaliza tu pedido</h2>
+            
+            <div class="selection-status" id="selection-text">
+                Ningún producto seleccionado
+            </div>
+
+            <div class="form-group">
+                <label for="userName">Nombre en el zapato</label>
+                <input type="text" id="userName" placeholder="Ej: JUANITO" maxlength="12">
+            </div>
+
+            <div class="form-group">
+                <label for="userNumber">Número dorsal</label>
+                <input type="number" id="userNumber" placeholder="Ej: 7" min="0" max="99">
+            </div>
+
+            <button class="btn-buy" id="buyBtn" onclick="buy()" disabled>
+                Completar Compra
+            </button>
+        </section>
+    </div>
+
+    <footer>
+        &copy; 2024 ZapasCustom - Proyecto Demo Educativo. No afiliado a clubes oficiales.
+    </footer>
+
+    <!-- --- JAVASCRIPT LÓGICA (PRD Sección 9) --- -->
+    <script>
+        // Estado global de la aplicación
+        let state = {
+            selectedProduct: null,
+            userName: "",
+            userNumber: ""
+        };
+
+        /**
+         * Selecciona un producto y actualiza la UI
+         */
+        function selectProduct(productName, cardId) {
+            // Actualizar estado
+            state.selectedProduct = productName;
+
+            // Actualizar Feedback Visual en las Cards
+            const allCards = document.querySelectorAll('.product-card');
+            allCards.forEach(card => card.classList.remove('selected'));
+            document.getElementById(cardId).classList.add('selected');
+
+            // Actualizar texto de selección
+            const statusDiv = document.getElementById('selection-text');
+            statusDiv.innerHTML = `Seleccionado: <span style="color: #e63946">${productName}</span>`;
+            statusDiv.style.background = "#444";
+
+            // Habilitar botón de compra
+            document.getElementById('buyBtn').disabled = false;
+
+            // Scroll suave a la zona de personalización
+            document.getElementById('personalizacion').scrollIntoView({ behavior: 'smooth' });
+        }
+
+        /**
+         * Simula el proceso de compra con validaciones
+         */
+        function buy() {
+            const nameInput = document.getElementById('userName').value.trim();
+            const numberInput = document.getElementById('userNumber').value.trim();
+
+            // Validaciones (PRD Sección 10)
+            if (!state.selectedProduct) {
+                alert("Por favor, selecciona primero un modelo de zapato.");
+                return;
+            }
+
+            if (nameInput === "") {
+                alert("Debes indicar un nombre para la personalización.");
+                return;
+            }
+
+            if (numberInput === "") {
+                alert("Debes indicar un número para el dorsal.");
+                return;
+            }
+
+            // Éxito: Resumen de compra (PRD Sección 6.4)
+            const resumen = `
+¡PEDIDO REALIZADO CON ÉXITO!
+---------------------------
+Producto: ${state.selectedProduct}
+Nombre personalizado: ${nameInput.toUpperCase()}
+Número: ${numberInput}
+
+Gracias por confiar en ZapasCustom.
+            `;
+            
+            alert(resumen);
+        }
+    </script>
+</body>
+</html>
